@@ -207,3 +207,4 @@ type Act<R extends Room, Action extends keyof R["actions"]> =
 
 type Step1 = Act<Room1, "Grab carabiner">
 type Step2 = Act<Room1, "Grab toiletries">
+type Step3 = Act<Room1, "Grab keys">
