@@ -19,7 +19,7 @@ type Room1<S extends StudentState = { health: 100, inventory: [] }> = {
         "Grab toiletries": [undefined, Room1_3<S>],
         "Grab carabiner": [undefined, Room1_4<{ health: S["health"], inventory: [...S["inventory"], "Carabiner"] }>],
         "Grab student card": [undefined, Room1_5<{ health: S["health"], inventory: [...S["inventory"], "Student Card"] }>],
-        "Grab keys": [undefined, Corridor]
+        "Grab keys": [undefined, Corridor<{health: S["health"], inventory: [...S['inventory'], "Keys"]}>]
     };
 };
 
@@ -30,7 +30,7 @@ type Room1_2<S extends StudentState = { health: 100, inventory: [] }> = {
         "Grab toiletries": [undefined, Room1_3<S>],
         "Grab carabiner": [undefined, Room1_4<{ health: S["health"], inventory: [...S["inventory"], "Carabiner"] }>],
         "Grab student card": [undefined, Room1_5<{ health: S["health"], inventory: [...S["inventory"], "Student Card"] }>],
-        "Grab keys": [undefined, Corridor]
+        "Grab keys": [undefined, Corridor<{health: S["health"], inventory: [...S['inventory'], "Keys"]}>]
     };
 };
 
@@ -41,18 +41,18 @@ type Room1_3<S extends StudentState = { health: 100, inventory: [] }> = {
         "Grab toothbrush": [undefined, Room1_2<S>],
         "Grab carabiner": [undefined, Room1_4<{ health: S["health"], inventory: [...S["inventory"], "Carabiner"] }>],
         "Grab student card": [undefined, Room1_5<{ health: S["health"], inventory: [...S["inventory"], "Student Card"] }>],
-        "Grab keys": [undefined, Corridor]
+        "Grab keys": [undefined, Corridor<{health: S["health"], inventory: [...S['inventory'], "Keys"]}>]
     };
 };
 
 type Room1_4<S extends StudentState = { health: 100, inventory: [] }> = {
     text: "You picked up the Carabiner 🔒";
-    studentState: { health: S['health'], inventory: [...S["inventory"], "Carabiner"] };
+    studentState: S;
     actions: {
         "Grab toothbrush": [undefined, Room1_2<S>],
         "Grab toiletries": [undefined, Room1_3<S>],
         "Grab student card": [undefined, Room1_5<{ health: S["health"], inventory: [...S["inventory"], "Student Card"] }>],
-        "Grab keys": [undefined, Corridor]
+        "Grab keys": [undefined, Corridor<{health: S["health"], inventory: [...S['inventory'], "Keys"]}>]
     };
 };
 
@@ -63,7 +63,7 @@ type Room1_5<S extends StudentState = { health: 100, inventory: [] }> = {
         "Grab toothbrush": [undefined, Room1_2<S>],
         "Grab toiletries": [undefined, Room1_3<S>],
         "Grab carabiner": [undefined, Room1_4<{ health: S["health"], inventory: [...S["inventory"], "Carabiner"] }>],
-        "Grab keys": [undefined, Corridor]
+        "Grab keys": [undefined, Corridor<{health: S["health"], inventory: [...S['inventory'], "Keys"]}>]
     };
 };
 
@@ -206,5 +206,6 @@ type Act<R extends Room, Action extends keyof R["actions"]> =
     ? R["actions"][Action][1] : never;
 
 type Step1 = Act<Room1, "Grab carabiner">
-type Step2 = Act<Room1, "Grab toiletries">
-type Step3 = Act<Room1, "Grab keys">
+type Step2 = Act<Step1, "Grab toiletries">
+type Step3 = Act<Step2, "Grab keys">
+type Step4 = Act<Step3, "Get in elevator">['studentState']['inventory']
