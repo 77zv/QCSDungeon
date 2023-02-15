@@ -103,6 +103,7 @@ type Elevator_2<S extends StudentState = { health: 100, inventory: [] }> = {
     actions: {
         fifth: [undefined, Elevator<S>]
         first: [undefined, FirstFloorVic<S>]
+        lazy: [undefined, LazyScholar<S>]
     };
 };
 type Elevator_3<S extends StudentState = { health: 100, inventory: [] }> = {
@@ -111,6 +112,7 @@ type Elevator_3<S extends StudentState = { health: 100, inventory: [] }> = {
     actions: {
         fifth: [undefined, Elevator<S>]
         ground: [undefined, LazyScholar<S>]
+        "go to lenny" : [undefined, Dead_1<S>]
     }
 }
 
@@ -118,31 +120,32 @@ type LazyScholar<S extends StudentState = { health: 100, inventory: [] }> = {
     text: "You're at the Lazy Scholar. You can get a snack or go back to the elevator.";
     studentState: S;
     actions: {
-        "Get back in elevator": [undefined, Elevator_2<S>]
-        "Order Chicken Tendies": [undefined, LazyScholar_2<{ health: S["health"], inventory: [...S["inventory"], "Chicken Tendies"] }>],
-        "Order Snackers": [undefined, LazyScholar_3<{ health: S["health"], inventory: [...S["inventory"], "Snackers"] }>],
-        "Order Poutine": [undefined, LazyScholar_4<{ health: S["health"], inventory: [...S["inventory"], "Poutine"] }>],
-        "Order Salad": [undefined, LazyScholar_5<{ health: S["health"], inventory: [...S["inventory"], "Fries"] }>]
+        "Get back in elevator": ["Student Card", Elevator_2<S>]
+        "Order Chicken Tendies": ["Student Card", LazyScholar_2<{ health: S["health"], inventory: [...S["inventory"], "Chicken Tendies"] }>],
+        "Order Snackers": ["Student Card", LazyScholar_3<{ health: S["health"], inventory: [...S["inventory"], "Snackers"] }>],
+        "Order Poutine": ["Student Card", LazyScholar_4<{ health: S["health"], inventory: [...S["inventory"], "Poutine"] }>],
+        "Order Salad": ["Student Card", LazyScholar_5<{ health: S["health"], inventory: [...S["inventory"], "Fries"] }>]
     }
 }
 type LazyScholar_2<S extends StudentState = { health: 100, inventory: [] }> = {
     text: "You ordered Chicken Tendies. You can get a snack or go back to the elevator.";
     studentState: S;
     actions: {
-        "Get back in elevator": [undefined, Elevator_2<S>],
-        "Order Snackers": [undefined, LazyScholar_3<{ health: S["health"], inventory: [...S["inventory"], "Snackers"] }>],
-        "Order Poutine": [undefined, LazyScholar_4<{ health: S["health"], inventory: [...S["inventory"], "Poutine"] }>],
-        "Order Salad": [undefined, LazyScholar_5<{ health: S["health"], inventory: [...S["inventory"], "Fries"] }>]
+        "Get back in elevator": ["Student Card", Elevator_2<S>],
+        "Order Snackers": ["Student Card", LazyScholar_3<{ health: S["health"], inventory: [...S["inventory"], "Snackers"] }>],
+        "Order Poutine": ["Student Card", LazyScholar_4<{ health: S["health"], inventory: [...S["inventory"], "Poutine"] }>],
+        "Order Salad": ["Student Card", LazyScholar_5<{ health: S["health"], inventory: [...S["inventory"], "Fries"] }>]
     }
 }
+
 type LazyScholar_3<S extends StudentState = { health: 100, inventory: [] }> = {
     text: "You ordered Snackers. You can get a snack or go back to the elevator.";
     studentState: S;
     actions: {
-        "Get back in elevator": [undefined, Elevator_2<S>],
-        "Order Chicken Tendies": [undefined, LazyScholar_2<{ health: S["health"], inventory: [...S["inventory"], "Chicken Tendies"] }>],
-        "Order Poutine": [undefined, LazyScholar_4<{ health: S["health"], inventory: [...S["inventory"], "Poutine"] }>],
-        "Order Salad": [undefined, LazyScholar_5<{ health: S["health"], inventory: [...S["inventory"], "Fries"] }>]
+        "Get back in elevator": ["Student Card", Elevator_2<S>],
+        "Order Chicken Tendies": ["Student Card", LazyScholar_2<{ health: S["health"], inventory: [...S["inventory"], "Chicken Tendies"] }>],
+        "Order Poutine": ["Student Card", LazyScholar_4<{ health: S["health"], inventory: [...S["inventory"], "Poutine"] }>],
+        "Order Salad": ["Student Card", LazyScholar_5<{ health: S["health"], inventory: [...S["inventory"], "Fries"] }>]
     }
 }
 
@@ -150,10 +153,10 @@ type LazyScholar_4<S extends StudentState = { health: 100, inventory: [] }> = {
     text: "You ordered Poutine. You can get a snack or go back to the elevator.";
     studentState: S;
     actions: {
-        "Get back in elevator": [undefined, Elevator_2<S>]
-        "Order Chicken Tendies": [undefined, LazyScholar_2<{ health: S["health"], inventory: [...S["inventory"], "Chicken Tendies"] }>],
-        "Order Snackers": [undefined, LazyScholar_3<{ health: S["health"], inventory: [...S["inventory"], "Snackers"] }>],
-        "Order Salad": [undefined, LazyScholar_5<{ health: S["health"], inventory: [...S["inventory"], "Fries"] }>]
+        "Get back in elevator": ["Student Card", Elevator_2<S>]
+        "Order Chicken Tendies": ["Student Card", LazyScholar_2<{ health: S["health"], inventory: [...S["inventory"], "Chicken Tendies"] }>],
+        "Order Snackers": ["Student Card", LazyScholar_3<{ health: S["health"], inventory: [...S["inventory"], "Snackers"] }>],
+        "Order Salad": ["Student Card", LazyScholar_5<{ health: S["health"], inventory: [...S["inventory"], "Fries"] }>]
     }
 }
 
@@ -161,10 +164,10 @@ type LazyScholar_5<S extends StudentState = { health: 100, inventory: [] }> = {
     text: "You tried to order a Salad, but some uncontrollable force made you say Fries instead.";
     studentState: S;
     actions: {
-        "Get back in elevator": [undefined, Elevator_2<S>],
-        "Order Chicken Tendies": [undefined, LazyScholar_2<{ health: S["health"], inventory: [...S["inventory"], "Chicken Tendies"] }>],
-        "Order Snackers": [undefined, LazyScholar_3<{ health: S["health"], inventory: [...S["inventory"], "Snackers"] }>],
-        "Order Poutine": [undefined, LazyScholar_4<{ health: S["health"], inventory: [...S["inventory"], "Poutine"] }>]
+        "Get back in elevator": ["Student Card", Elevator_2<S>],
+        "Order Chicken Tendies": ["Student Card", LazyScholar_2<{ health: S["health"], inventory: [...S["inventory"], "Chicken Tendies"] }>],
+        "Order Snackers": ["Student Card", LazyScholar_3<{ health: S["health"], inventory: [...S["inventory"], "Snackers"] }>],
+        "Order Poutine": ["Student Card", LazyScholar_4<{ health: S["health"], inventory: [...S["inventory"], "Poutine"] }>]
     }
 }
 
@@ -199,13 +202,14 @@ type Includes<List extends any[], Element extends any>
 type CanAct<A extends Room["actions"][string], I extends StudentState["inventory"]> =
     A[0] extends undefined ? true : Includes<I, A[0]>;
 
-type D = CanAct<["Fries", Elevator_2], ["Snackers"]>
-
 type Act<R extends Room, Action extends keyof R["actions"]> =
     CanAct<R["actions"][Action], R["studentState"]['inventory']> extends true
     ? R["actions"][Action][1] : never;
 
 type Step1 = Act<Room1, "Grab carabiner">
-type Step2 = Act<Step1, "Grab toiletries">
+type Step2 = Act<Step1, "Grab student card">
 type Step3 = Act<Step2, "Grab keys">
-type Step4 = Act<Step3, "Get in elevator">['studentState']['inventory']
+type Step4 = Act<Step3, "Get in elevator">
+type Step5 = Act<Step4, "ground">
+type Step6 = Act<Step5, "lazy">
+type Step7 = Act<Step6, "Order Chicken Tendies">
