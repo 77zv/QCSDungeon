@@ -213,3 +213,7 @@ type Step4 = Act<Step3, "Get in elevator">
 type Step5 = Act<Step4, "ground">
 type Step6 = Act<Step5, "lazy">
 type Step7 = Act<Step6, "Order Chicken Tendies">
+type Step8 = Act<Step7, "Get back in elevator">
+type Step9 = Act<Step8, "first">
+type Step10 = Act<Step9, "Go to the gym">
+
