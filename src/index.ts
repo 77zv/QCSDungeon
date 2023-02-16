@@ -78,7 +78,7 @@ type Corridor<S extends StudentState = { health: 100, inventory: [] }> = {
 }
 
 type Corridor_2<S extends StudentState = { health: 100, inventory: [] }> = {
-    text: "You've left the elavator and now you're back on the fifth floor hallway. You better move quick before you're forced into social interaction 🧟👹👺!";
+    text: "you someone was was forced into social interaction 🧟👹👺! you passed out.";
     studentState: S;
     actions: {
         "Go back inside": ["Keys", Room1<S>],
